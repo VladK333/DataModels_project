@@ -94,7 +94,7 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
         {
             if (powerTransformerEnd != null && powerTransformerEnd.Count > 0 && (refType == TypeOfReference.Target || refType == TypeOfReference.Both))
             {
-                references[ModelCode.CONEQUIP_TERMINALS] = powerTransformerEnd.GetRange(0, powerTransformerEnd.Count);
+                references[ModelCode.POWERTRANS_PTRANSEND] = powerTransformerEnd.GetRange(0, powerTransformerEnd.Count);
             }
 
             base.GetReferences(references, refType);

@@ -17,9 +17,6 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
         private float targetValue;
         private long terminal;
 
-        //kako reference?
-        //kako enum u get metodi
-
         public RegulatingControl(long globalId) : base(globalId) { }
 
         public bool Discrete { get { return discrete; } set { discrete = value; } }
