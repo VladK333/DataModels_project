@@ -122,23 +122,20 @@ namespace FTN.Services.NetworkModelService
 			IdentifiedObject io = null;			
 			switch ((DMSType)type)
 			{
-                case DMSType.SERIESCOMP:
-                    io = new SeriesCompensator(globalId);
+                case DMSType.POWERTRANSFORMER:
+                    io = new PowerTransformer(globalId);
                     break;
-                case DMSType.DCLSEGMENT:
-					io = new DCLineSegment(globalId);
+                case DMSType.POWERTRANSFORMEREND:
+					io = new PowerTransformerEnd(globalId);
 					break;
-				case DMSType.ACLSEGMENT:
-					io = new ACLineSegment(globalId);
+				case DMSType.TAPCHANGER:
+					io = new TapChanger(globalId);
 					break;
+                case DMSType.TAPCHANGERCONTROL:
+                    io = new TapChangerControl(globalId);
+                    break;
                 case DMSType.TERMINAL:
-                    io = new Terminal(globalId);
-                    break;
-                case DMSType.CONNODE:
-					io = new ConnectivityNode(globalId);
-					break;
-				case DMSType.CONNODECON:
-					io = new ConnectivityNodeContainer(globalId);
+					io = new Terminal(globalId);
 					break;
 
                 default:					
