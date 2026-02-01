@@ -211,18 +211,18 @@ namespace FTN.Common
 						}
 
 						break;
-					//case PropertyType.Enum:
-					//	try
-					//	{
-					//		EnumDescs enumDescs = new EnumDescs();
-					//		xmlWriter.WriteValue(enumDescs.GetStringFromEnum(this.Properties[i].Id, this.Properties[i].AsEnum()));
-					//	}
-					//	catch (Exception)
-					//	{
-					//		xmlWriter.WriteValue(this.Properties[i].AsEnum());
-					//	}
+					case PropertyType.Enum:
+						try
+						{
+							EnumDescs enumDescs = new EnumDescs();
+							xmlWriter.WriteValue(enumDescs.GetStringFromEnum(this.Properties[i].Id, this.Properties[i].AsEnum()));
+						}
+						catch (Exception)
+						{
+							xmlWriter.WriteValue(this.Properties[i].AsEnum());
+						}
 
-					//	break;
+						break;
 					case PropertyType.Reference:
 						xmlWriter.WriteValue(String.Format("0x{0:x16}", this.Properties[i].AsReference()));
 						break;
@@ -356,33 +356,33 @@ namespace FTN.Common
 						}
 
 						break;
-					//case PropertyType.EnumVector:
-					//	if (this.Properties[i].AsEnums().Count > 0)
-					//	{
-					//		sb = new StringBuilder(100);
-					//		EnumDescs enumDescs = new EnumDescs();
+					case PropertyType.EnumVector:
+						if (this.Properties[i].AsEnums().Count > 0)
+						{
+							sb = new StringBuilder(100);
+							EnumDescs enumDescs = new EnumDescs();
 
-					//		for (int j = 0; j < this.Properties[i].AsEnums().Count; j++)
-					//		{
-					//			try
-					//			{
-					//				sb.Append(String.Format("{0}", enumDescs.GetStringFromEnum(this.Properties[i].Id, this.Properties[i].AsEnums()[j]))).Append(", ");
-					//			}
-					//			catch (Exception)
-					//			{
-					//				sb.Append(String.Format("{0}", this.Properties[i].AsEnums()[j])).Append(", ");
-					//			}
-					//		}
-							
-					//		xmlWriter.WriteValue(sb.ToString(0, sb.Length - 2));
-					//	}
-					//	else
-					//	{
-					//		xmlWriter.WriteValue("empty enum vector");
-					//	}
+							for (int j = 0; j < this.Properties[i].AsEnums().Count; j++)
+							{
+								try
+								{
+									sb.Append(String.Format("{0}", enumDescs.GetStringFromEnum(this.Properties[i].Id, this.Properties[i].AsEnums()[j]))).Append(", ");
+								}
+								catch (Exception)
+								{
+									sb.Append(String.Format("{0}", this.Properties[i].AsEnums()[j])).Append(", ");
+								}
+							}
 
-					//	break;
-					
+							xmlWriter.WriteValue(sb.ToString(0, sb.Length - 2));
+						}
+						else
+						{
+							xmlWriter.WriteValue("empty enum vector");
+						}
+
+						break;
+
 					default:
 						throw new Exception("Failed to export Resource Description as XML. Invalid property type.");
 				}

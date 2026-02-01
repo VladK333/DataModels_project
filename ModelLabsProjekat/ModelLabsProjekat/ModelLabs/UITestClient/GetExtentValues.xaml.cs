@@ -152,7 +152,6 @@ namespace UITestClient
                             sb.Append(p.AsString() ?? string.Empty);
                             break;
                         case PropertyType.Enum:
-                            // Handle enum properties
                             sb.Append(GetEnumStringValue(p.Id, p.AsEnum()));
                             break;
                         case PropertyType.Int64Vector:
@@ -173,7 +172,7 @@ namespace UITestClient
             ResultsTextBox.Text = sb.ToString();
         }
 
-        private string GetEnumStringValue(ModelCode propertyId, short enumValue)
+        public static string GetEnumStringValue(ModelCode propertyId, short enumValue)
         {
             // Handle enum properties
             try

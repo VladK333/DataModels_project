@@ -1,0 +1,187 @@
+﻿<delta id="0">
+  <operations>
+    <operation type="insert">
+      <ResourceDescriptions count="12">
+        <ResourceDescription>
+          <id gid="0x00000001ffffffff" type="POWERTRANSFORMER" />
+          <Properties>
+            <Property id="IDOBJ_MRID" value="PT1" />
+            <Property id="IDOBJ_NAME" value="PowerTransformer_1" />
+            <Property id="IDOBJ_ALIASNAME" value="PT1_Alias" />
+            <Property id="EQUIPMENT_AGGREGATE" value="0" />
+            <Property id="EQUIPMENT_NIS" value="1" />
+            <Property id="POWERTRANS_VECTOR" value="Dyn11" />
+          </Properties>
+        </ResourceDescription>
+        <ResourceDescription>
+          <id gid="0x00000001fffffffe" type="POWERTRANSFORMER" />
+          <Properties>
+            <Property id="IDOBJ_MRID" value="PT2" />
+            <Property id="IDOBJ_NAME" value="PowerTransformer_2" />
+            <Property id="IDOBJ_ALIASNAME" value="PT2_Alias" />
+            <Property id="EQUIPMENT_AGGREGATE" value="1" />
+            <Property id="EQUIPMENT_NIS" value="0" />
+            <Property id="POWERTRANS_VECTOR" value="Yyn0" />
+          </Properties>
+        </ResourceDescription>
+        <ResourceDescription>
+          <id gid="0x00000005ffffffff" type="TERMINAL" />
+          <Properties>
+            <Property id="IDOBJ_MRID" value="T1" />
+            <Property id="IDOBJ_NAME" value="Terminal_1" />
+            <Property id="IDOBJ_ALIASNAME" value="T1_Alias" />
+            <Property id="TERMINAL_CONNECTED" value="1" />
+            <Property id="TERMINAL_SEQNUMBER" value="1" />
+            <Property id="TERMINAL_CONEQUIP" value="0x00000001ffffffff" />
+          </Properties>
+        </ResourceDescription>
+        <ResourceDescription>
+          <id gid="0x00000005fffffffe" type="TERMINAL" />
+          <Properties>
+            <Property id="IDOBJ_MRID" value="T2" />
+            <Property id="IDOBJ_NAME" value="Terminal_2" />
+            <Property id="IDOBJ_ALIASNAME" value="T2_Alias" />
+            <Property id="TERMINAL_CONNECTED" value="1" />
+            <Property id="TERMINAL_SEQNUMBER" value="1" />
+            <Property id="TERMINAL_CONEQUIP" value="0x00000001fffffffe" />
+          </Properties>
+        </ResourceDescription>
+        <ResourceDescription>
+          <id gid="0x00000005fffffffd" type="TERMINAL" />
+          <Properties>
+            <Property id="IDOBJ_MRID" value="T3" />
+            <Property id="IDOBJ_NAME" value="Terminal_3" />
+            <Property id="IDOBJ_ALIASNAME" value="T3_Alias" />
+            <Property id="TERMINAL_CONNECTED" value="0" />
+            <Property id="TERMINAL_SEQNUMBER" value="2" />
+            <Property id="TERMINAL_CONEQUIP" value="0x00000001ffffffff" />
+          </Properties>
+        </ResourceDescription>
+        <ResourceDescription>
+          <id gid="0x00000005fffffffc" type="TERMINAL" />
+          <Properties>
+            <Property id="IDOBJ_MRID" value="T4" />
+            <Property id="IDOBJ_NAME" value="Terminal_4" />
+            <Property id="IDOBJ_ALIASNAME" value="T4_Alias" />
+            <Property id="TERMINAL_CONNECTED" value="1" />
+            <Property id="TERMINAL_SEQNUMBER" value="2" />
+            <Property id="TERMINAL_CONEQUIP" value="0x00000001fffffffe" />
+          </Properties>
+        </ResourceDescription>
+        <ResourceDescription>
+          <id gid="0x00000004ffffffff" type="TAPCHANGERCONTROL" />
+          <Properties>
+            <Property id="IDOBJ_MRID" value="TCC1" />
+            <Property id="IDOBJ_NAME" value="TapChangerControl_1" />
+            <Property id="IDOBJ_ALIASNAME" value="TCC1_Alias" />
+            <Property id="REGULATIONGCONTROL_DISC" value="1" />
+            <Property id="REGULATIONGCONTROL_MP" value="A" />
+            <Property id="REGULATIONGCONTROL_TR" value="2.5" />
+            <Property id="REGULATIONGCONTROL_TV" value="110" />
+            <Property id="REGULATIONGCONTROL_TERMINAL" value="0x00000005ffffffff" />
+            <Property id="TAPCHANGERCONTROL_LV" value="115" />
+            <Property id="TAPCHANGERCONTROL_LDC" value="1" />
+            <Property id="TAPCHANGERCONTROL_LDR" value="0.5" />
+            <Property id="TAPCHANGERCONTROL_LDX" value="1.2" />
+            <Property id="TAPCHANGERCONTROL_RLDR" value="0.45" />
+            <Property id="TAPCHANGERCONTROL_RLDX" value="1.1" />
+          </Properties>
+        </ResourceDescription>
+        <ResourceDescription>
+          <id gid="0x00000004fffffffe" type="TAPCHANGERCONTROL" />
+          <Properties>
+            <Property id="IDOBJ_MRID" value="TCC2" />
+            <Property id="IDOBJ_NAME" value="TapChangerControl_2" />
+            <Property id="IDOBJ_ALIASNAME" value="TCC2_Alias" />
+            <Property id="REGULATIONGCONTROL_DISC" value="0" />
+            <Property id="REGULATIONGCONTROL_TR" value="3" />
+            <Property id="REGULATIONGCONTROL_TV" value="220" />
+            <Property id="REGULATIONGCONTROL_TERMINAL" value="0x00000005fffffffe" />
+            <Property id="TAPCHANGERCONTROL_LV" value="230" />
+            <Property id="TAPCHANGERCONTROL_LDC" value="0" />
+            <Property id="TAPCHANGERCONTROL_LDR" value="0.6" />
+            <Property id="TAPCHANGERCONTROL_LDX" value="1.5" />
+            <Property id="TAPCHANGERCONTROL_RLDR" value="0.55" />
+            <Property id="TAPCHANGERCONTROL_RLDX" value="1.4" />
+          </Properties>
+        </ResourceDescription>
+        <ResourceDescription>
+          <id gid="0x00000003ffffffff" type="TAPCHANGER" />
+          <Properties>
+            <Property id="IDOBJ_MRID" value="TC1" />
+            <Property id="IDOBJ_NAME" value="TapChanger_1" />
+            <Property id="IDOBJ_ALIASNAME" value="TC1_Alias" />
+            <Property id="TAPCHANGER_HS" value="16" />
+            <Property id="TAPCHANGER_INITDEL" value="5" />
+            <Property id="TAPCHANGER_LS" value="0" />
+            <Property id="TAPCHANGER_IF" value="1" />
+            <Property id="TAPCHANGER_NEUS" value="8" />
+            <Property id="TAPCHANGER_NU" value="110" />
+            <Property id="TAPCHANGER_NORMS" value="8" />
+            <Property id="TAPCHANGER_RS" value="1" />
+            <Property id="TAPCHANGER_SD" value="2.5" />
+            <Property id="TAPCHANGER_TAPCHANGERCONTROL" value="0x00000004ffffffff" />
+          </Properties>
+        </ResourceDescription>
+        <ResourceDescription>
+          <id gid="0x00000003fffffffe" type="TAPCHANGER" />
+          <Properties>
+            <Property id="IDOBJ_MRID" value="TC2" />
+            <Property id="IDOBJ_NAME" value="TapChanger_2" />
+            <Property id="IDOBJ_ALIASNAME" value="TC2_Alias" />
+            <Property id="TAPCHANGER_HS" value="20" />
+            <Property id="TAPCHANGER_INITDEL" value="6" />
+            <Property id="TAPCHANGER_LS" value="-4" />
+            <Property id="TAPCHANGER_IF" value="0" />
+            <Property id="TAPCHANGER_NEUS" value="10" />
+            <Property id="TAPCHANGER_NU" value="220" />
+            <Property id="TAPCHANGER_NORMS" value="10" />
+            <Property id="TAPCHANGER_RS" value="0" />
+            <Property id="TAPCHANGER_SD" value="3" />
+            <Property id="TAPCHANGER_TAPCHANGERCONTROL" value="0x00000004fffffffe" />
+          </Properties>
+        </ResourceDescription>
+        <ResourceDescription>
+          <id gid="0x00000002ffffffff" type="POWERTRANSFORMEREND" />
+          <Properties>
+            <Property id="IDOBJ_MRID" value="PTE1" />
+            <Property id="IDOBJ_NAME" value="PowerTransformerEnd_1" />
+            <Property id="IDOBJ_ALIASNAME" value="PTE1_Alias" />
+            <Property id="TRANSFORMEREND_TERMINAL" value="0x00000005ffffffff" />
+            <Property id="POWERTRANSEND_B" value="0.0001" />
+            <Property id="POWERTRANSEND_B0" value="0.00015" />
+            <Property id="POWERTRANSEND_G" value="5E-05" />
+            <Property id="POWERTRANSEND_G0" value="8E-05" />
+            <Property id="POWERTRANSEND_PAC" value="11" />
+            <Property id="POWERTRANSEND_R" value="0.5" />
+            <Property id="POWERTRANSEND_R0" value="0.8" />
+            <Property id="POWERTRANSEND_RS" value="40000" />
+            <Property id="POWERTRANSEND_RU" value="110000" />
+            <Property id="POWERTRANSEND_X" value="10.5" />
+            <Property id="POWERTRANSEND_X0" value="12" />
+          </Properties>
+        </ResourceDescription>
+        <ResourceDescription>
+          <id gid="0x00000002fffffffe" type="POWERTRANSFORMEREND" />
+          <Properties>
+            <Property id="IDOBJ_MRID" value="PTE2" />
+            <Property id="IDOBJ_NAME" value="PowerTransformerEnd_2" />
+            <Property id="IDOBJ_ALIASNAME" value="PTE2_Alias" />
+            <Property id="POWERTRANSEND_B" value="0.00012" />
+            <Property id="POWERTRANSEND_B0" value="0.00018" />
+            <Property id="POWERTRANSEND_G" value="6E-05" />
+            <Property id="POWERTRANSEND_G0" value="9E-05" />
+            <Property id="POWERTRANSEND_PAC" value="0" />
+            <Property id="POWERTRANSEND_R" value="0.6" />
+            <Property id="POWERTRANSEND_R0" value="0.9" />
+            <Property id="POWERTRANSEND_RS" value="63000" />
+            <Property id="POWERTRANSEND_RU" value="220000" />
+            <Property id="POWERTRANSEND_X" value="15.5" />
+            <Property id="POWERTRANSEND_X0" value="18" />
+            <Property id="POWERTRANSEND_PTRANS" value="0x00000001fffffffe" />
+          </Properties>
+        </ResourceDescription>
+      </ResourceDescriptions>
+    </operation>
+  </operations>
+</delta>

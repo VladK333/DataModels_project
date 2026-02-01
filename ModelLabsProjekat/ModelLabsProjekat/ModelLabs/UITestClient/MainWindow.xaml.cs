@@ -102,6 +102,9 @@ namespace UITestClient
                     case PropertyType.Reference:
                         sb.Append($"0x{p.AsReference():x16}");
                         break;
+                    case PropertyType.Enum:
+                        sb.Append(GetExtentValues.GetEnumStringValue(p.Id, p.AsEnum()));
+                        break;
                     case PropertyType.String:
                         sb.Append(p.AsString() ?? string.Empty);
                         break;

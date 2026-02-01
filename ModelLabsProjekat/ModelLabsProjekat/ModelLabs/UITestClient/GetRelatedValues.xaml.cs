@@ -167,6 +167,9 @@ namespace UITestClient
                         case PropertyType.DateTime:
                             sb.Append(p.Id == ModelCode.IDOBJ_GID ? $"0x{p.AsLong():x16}" : p.AsLong().ToString());
                             break;
+                        case PropertyType.Enum:
+                            sb.Append(GetExtentValues.GetEnumStringValue(p.Id, p.AsEnum()));
+                            break;
                         case PropertyType.Reference:
                             sb.Append($"0x{p.AsReference():x16}");
                             break;
