@@ -866,18 +866,18 @@ namespace FTN.Common
 
 		private void InitializeTypeIdsInInsertOrder()
 		{
-            typeIdsInInsertOrder.Add(ModelCode.POWERTRANS);  //max kardinalitet 1
-            typeIdsInInsertOrder.Add(ModelCode.TAPCHANGERCONTROL);  //max kardinalitet 1
-            typeIdsInInsertOrder.Add(ModelCode.TERMINAL);	//max kardinalitet 1, ali ima i 0..* ???
-            typeIdsInInsertOrder.Add(ModelCode.POWERTRANSEND);  //max kardinlitet *
-            typeIdsInInsertOrder.Add(ModelCode.TAPCHANGER);  //max kardinlitet *
+            typeIdsInInsertOrder.Add(ModelCode.POWERTRANS);          
+            typeIdsInInsertOrder.Add(ModelCode.TERMINAL);            
+            typeIdsInInsertOrder.Add(ModelCode.TAPCHANGERCONTROL);  
+            typeIdsInInsertOrder.Add(ModelCode.TAPCHANGER);          
+            typeIdsInInsertOrder.Add(ModelCode.POWERTRANSEND);
         }
 
 		private void InitializeNotSettablePropertyIds()
-		{			
-			notSettablePropertyIds.Add(ModelCode.IDOBJ_GID);
-			notSettablePropertyIds.Add(ModelCode.CONEQUIP_TERMINALS);
-			notSettablePropertyIds.Add(ModelCode.POWERTRANS_PTRANSEND); 
+		{
+            notSettablePropertyIds.Add(ModelCode.IDOBJ_GID);
+            notSettablePropertyIds.Add(ModelCode.CONEQUIP_TERMINALS);
+            notSettablePropertyIds.Add(ModelCode.POWERTRANS_PTRANSEND);
             notSettablePropertyIds.Add(ModelCode.TAPCHANGERCONTROL_TAPCHANGER);
             notSettablePropertyIds.Add(ModelCode.TERMINAL_REGULATINGCONTROL);
             notSettablePropertyIds.Add(ModelCode.TERMINAL_TRANSFORMEREND);

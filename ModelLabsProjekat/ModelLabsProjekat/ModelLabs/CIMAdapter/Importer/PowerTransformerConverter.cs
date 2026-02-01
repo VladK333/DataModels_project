@@ -11,6 +11,10 @@
 
         #region Populate ResourceDescription
 
+        // ========================================
+        // CORE HIERARCHY (Base Classes)
+        // ========================================
+
         public static void PopulateIdentifiedObjectProperties(FTN.IdentifiedObject cimIdentifiedObject, ResourceDescription rd)
         {
             if ((cimIdentifiedObject != null) && (rd != null))
@@ -63,6 +67,10 @@
             }
         }
 
+        // ========================================
+        // POWER TRANSFORMER BRANCH
+        // ========================================
+
         public static void PopulatePowerTransformerProperties(FTN.PowerTransformer cimPowerTransformer, ResourceDescription rd)
         {
             if ((cimPowerTransformer != null) && (rd != null))
@@ -75,6 +83,45 @@
                 }
             }
         }
+
+        // ========================================
+        // TERMINAL
+        // ========================================
+
+        public static void PopulateTerminalProperties(FTN.Terminal cimTerminal, ResourceDescription rd, ImportHelper importHelper, TransformAndLoadReport report)
+        {
+            if ((cimTerminal != null) && (rd != null))
+            {
+                PowerTransformerConverter.PopulateIdentifiedObjectProperties(cimTerminal, rd);
+
+                if (cimTerminal.ConnectedHasValue)
+                {
+                    rd.AddProperty(new Property(ModelCode.TERMINAL_CONNECTED, cimTerminal.Connected));
+                }
+                if (cimTerminal.PhasesHasValue)
+                {
+                    rd.AddProperty(new Property(ModelCode.TERMINAL_PHASES, (short)GetDMSPhaseCode(cimTerminal.Phases)));
+                }
+                if (cimTerminal.SequenceNumberHasValue)
+                {
+                    rd.AddProperty(new Property(ModelCode.TERMINAL_SEQNUMBER, cimTerminal.SequenceNumber));
+                }
+                if (cimTerminal.ConductingEquipmentHasValue)
+                {
+                    long gid = importHelper.GetMappedGID(cimTerminal.ConductingEquipment.ID);
+                    if (gid < 0)
+                    {
+                        report.Report.Append("WARNING: Convert ").Append(cimTerminal.GetType().ToString()).Append(" rdfID = \"").Append(cimTerminal.ID);
+                        report.Report.Append("\" - Failed to set reference to ConductingEquipment: rdfID \"").Append(cimTerminal.ConductingEquipment.ID).AppendLine(" \" is not mapped to GID!");
+                    }
+                    rd.AddProperty(new Property(ModelCode.TERMINAL_CONEQUIP, gid));
+                }
+            }
+        }
+
+        // ========================================
+        // REGULATING CONTROL BRANCH
+        // ========================================
 
         public static void PopulateRegulatingControlProperties(FTN.RegulatingControl cimRegulatingControl, ResourceDescription rd, ImportHelper importHelper, TransformAndLoadReport report)
         {
@@ -148,6 +195,10 @@
             }
         }
 
+        // ========================================
+        // TAP CHANGER
+        // ========================================
+
         public static void PopulateTapChangerProperties(FTN.TapChanger cimTapChanger, ResourceDescription rd, ImportHelper importHelper, TransformAndLoadReport report)
         {
             if ((cimTapChanger != null) && (rd != null))
@@ -202,6 +253,10 @@
                 }
             }
         }
+
+        // ========================================
+        // TRANSFORMER END BRANCH
+        // ========================================
 
         public static void PopulateTransformerEndProperties(FTN.TransformerEnd cimTransformerEnd, ResourceDescription rd, ImportHelper importHelper, TransformAndLoadReport report)
         {
@@ -285,37 +340,6 @@
                         report.Report.Append("\" - Failed to set reference to PowerTransformer: rdfID \"").Append(cimPowerTransformerEnd.PowerTransformer.ID).AppendLine(" \" is not mapped to GID!");
                     }
                     rd.AddProperty(new Property(ModelCode.POWERTRANSEND_PTRANS, gid));
-                }
-            }
-        }
-
-        public static void PopulateTerminalProperties(FTN.Terminal cimTerminal, ResourceDescription rd, ImportHelper importHelper, TransformAndLoadReport report)
-        {
-            if ((cimTerminal != null) && (rd != null))
-            {
-                PowerTransformerConverter.PopulateIdentifiedObjectProperties(cimTerminal, rd);
-
-                if (cimTerminal.ConnectedHasValue)
-                {
-                    rd.AddProperty(new Property(ModelCode.TERMINAL_CONNECTED, cimTerminal.Connected));
-                }
-                if (cimTerminal.PhasesHasValue)
-                {
-                    rd.AddProperty(new Property(ModelCode.TERMINAL_PHASES, (short)GetDMSPhaseCode(cimTerminal.Phases)));
-                }
-                if (cimTerminal.SequenceNumberHasValue)
-                {
-                    rd.AddProperty(new Property(ModelCode.TERMINAL_SEQNUMBER, cimTerminal.SequenceNumber));
-                }
-                if (cimTerminal.ConductingEquipmentHasValue)
-                {
-                    long gid = importHelper.GetMappedGID(cimTerminal.ConductingEquipment.ID);
-                    if (gid < 0)
-                    {
-                        report.Report.Append("WARNING: Convert ").Append(cimTerminal.GetType().ToString()).Append(" rdfID = \"").Append(cimTerminal.ID);
-                        report.Report.Append("\" - Failed to set reference to ConductingEquipment: rdfID \"").Append(cimTerminal.ConductingEquipment.ID).AppendLine(" \" is not mapped to GID!");
-                    }
-                    rd.AddProperty(new Property(ModelCode.TERMINAL_CONEQUIP, gid));
                 }
             }
         }

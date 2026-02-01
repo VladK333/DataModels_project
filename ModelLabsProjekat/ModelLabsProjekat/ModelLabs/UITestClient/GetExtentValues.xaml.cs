@@ -40,12 +40,11 @@ namespace UITestClient
 
             var codes = new List<ModelCode>
             {
-                ModelCode.CONNODECON,
-                ModelCode.CONNODE,
-                ModelCode.SERIESCOMP,
-                ModelCode.DCLSEGMENT,
-                ModelCode.ACLSEGMENT,
-                ModelCode.TERMINAL
+                ModelCode.POWERTRANS,
+                ModelCode.TERMINAL,
+                ModelCode.TAPCHANGERCONTROL,
+                ModelCode.TAPCHANGER,
+                ModelCode.POWERTRANSEND
             };
 
             ModelCodeComboBox.ItemsSource = codes
@@ -152,6 +151,10 @@ namespace UITestClient
                         case PropertyType.String:
                             sb.Append(p.AsString() ?? string.Empty);
                             break;
+                        case PropertyType.Enum:
+                            // Handle enum properties
+                            sb.Append(GetEnumStringValue(p.Id, p.AsEnum()));
+                            break;
                         case PropertyType.Int64Vector:
                         case PropertyType.ReferenceVector:
                             var longs = p.AsLongs();
@@ -168,6 +171,20 @@ namespace UITestClient
             }
 
             ResultsTextBox.Text = sb.ToString();
+        }
+
+        private string GetEnumStringValue(ModelCode propertyId, short enumValue)
+        {
+            // Handle enum properties
+            try
+            {
+                var enumDescs = new EnumDescs();
+                return enumDescs.GetStringFromEnum(propertyId, enumValue);
+            }
+            catch
+            {
+                return enumValue.ToString();
+            }
         }
 
         private void SelectAllCheckBox_Click(object sender, RoutedEventArgs e)

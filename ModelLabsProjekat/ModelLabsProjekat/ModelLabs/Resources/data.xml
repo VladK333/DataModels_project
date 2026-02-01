@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-	xmlns:cim="http://iec.ch/TC57/2010/CIM-schema-cim15#">
+	xmlns:cim="http://iec.ch/TC57/CIM100#">
 
-	<!-- PowerTransformer Objects -->
+	<!-- PowerTransformer Objects (DMSType: POWERTRANSFORMER = 0x0001) -->
+	<!-- Inherits: IdentifiedObject, PowerSystemResource, Equipment, ConductingEquipment -->
 	<cim:PowerTransformer rdf:ID="_PT1">
+		<!-- IdentifiedObject attributes -->
 		<cim:IdentifiedObject.mRID>PT1</cim:IdentifiedObject.mRID>
 		<cim:IdentifiedObject.name>PowerTransformer_1</cim:IdentifiedObject.name>
 		<cim:IdentifiedObject.aliasName>PT1_Alias</cim:IdentifiedObject.aliasName>
+		<!-- Equipment attributes -->
 		<cim:Equipment.aggregate>false</cim:Equipment.aggregate>
 		<cim:Equipment.normallyInService>true</cim:Equipment.normallyInService>
+		<!-- PowerTransformer own attributes -->
 		<cim:PowerTransformer.vectorGroup>Dyn11</cim:PowerTransformer.vectorGroup>
 	</cim:PowerTransformer>
 
@@ -17,110 +21,23 @@
 		<cim:IdentifiedObject.name>PowerTransformer_2</cim:IdentifiedObject.name>
 		<cim:IdentifiedObject.aliasName>PT2_Alias</cim:IdentifiedObject.aliasName>
 		<cim:Equipment.aggregate>true</cim:Equipment.aggregate>
-		<cim:Equipment.normallyInService>true</cim:Equipment.normallyInService>
+		<cim:Equipment.normallyInService>false</cim:Equipment.normallyInService>
 		<cim:PowerTransformer.vectorGroup>Yyn0</cim:PowerTransformer.vectorGroup>
 	</cim:PowerTransformer>
 
-	<!-- Terminal Objects -->
-	<cim:Terminal rdf:ID="_T1">
-		<cim:IdentifiedObject.mRID>T1</cim:IdentifiedObject.mRID>
-		<cim:IdentifiedObject.name>Terminal_1</cim:IdentifiedObject.name>
-		<cim:IdentifiedObject.aliasName>T1_Alias</cim:IdentifiedObject.aliasName>
-		<cim:Terminal.connected>true</cim:Terminal.connected>
-		<cim:Terminal.phases rdf:resource="http://iec.ch/TC57/2010/CIM-schema-cim15#PhaseCode.ABC"/>
-		<cim:Terminal.sequenceNumber>1</cim:Terminal.sequenceNumber>
-		<cim:Terminal.ConductingEquipment rdf:resource="#_PT1"/>
-	</cim:Terminal>
-
-	<cim:Terminal rdf:ID="_T2">
-		<cim:IdentifiedObject.mRID>T2</cim:IdentifiedObject.mRID>
-		<cim:IdentifiedObject.name>Terminal_2</cim:IdentifiedObject.name>
-		<cim:IdentifiedObject.aliasName>T2_Alias</cim:IdentifiedObject.aliasName>
-		<cim:Terminal.connected>true</cim:Terminal.connected>
-		<cim:Terminal.phases rdf:resource="http://iec.ch/TC57/2010/CIM-schema-cim15#PhaseCode.ABCN"/>
-		<cim:Terminal.sequenceNumber>2</cim:Terminal.sequenceNumber>
-		<cim:Terminal.ConductingEquipment rdf:resource="#_PT2"/>
-	</cim:Terminal>
-
-	<!-- TapChangerControl Objects -->
-	<cim:TapChangerControl rdf:ID="_TCC1">
-		<cim:IdentifiedObject.mRID>TCC1</cim:IdentifiedObject.mRID>
-		<cim:IdentifiedObject.name>TapChangerControl_1</cim:IdentifiedObject.name>
-		<cim:IdentifiedObject.aliasName>TCC1_Alias</cim:IdentifiedObject.aliasName>
-		<cim:RegulatingControl.discrete>true</cim:RegulatingControl.discrete>
-		<cim:RegulatingControl.mode rdf:resource="http://iec.ch/TC57/2010/CIM-schema-cim15#RegulatingControlModeKind.voltage"/>
-		<cim:RegulatingControl.monitoredPhase rdf:resource="http://iec.ch/TC57/2010/CIM-schema-cim15#PhaseCode.A"/>
-		<cim:RegulatingControl.targetRange>2.5</cim:RegulatingControl.targetRange>
-		<cim:RegulatingControl.targetValue>110.0</cim:RegulatingControl.targetValue>
-		<cim:RegulatingControl.Terminal rdf:resource="#_T1"/>
-		<cim:TapChangerControl.limitVoltage>115.0</cim:TapChangerControl.limitVoltage>
-		<cim:TapChangerControl.lineDropCompensation>true</cim:TapChangerControl.lineDropCompensation>
-		<cim:TapChangerControl.lineDropR>0.5</cim:TapChangerControl.lineDropR>
-		<cim:TapChangerControl.lineDropX>1.2</cim:TapChangerControl.lineDropX>
-		<cim:TapChangerControl.reverseLineDropR>0.45</cim:TapChangerControl.reverseLineDropR>
-		<cim:TapChangerControl.reverseLineDropX>1.1</cim:TapChangerControl.reverseLineDropX>
-	</cim:TapChangerControl>
-
-	<cim:TapChangerControl rdf:ID="_TCC2">
-		<cim:IdentifiedObject.mRID>TCC2</cim:IdentifiedObject.mRID>
-		<cim:IdentifiedObject.name>TapChangerControl_2</cim:IdentifiedObject.name>
-		<cim:IdentifiedObject.aliasName>TCC2_Alias</cim:IdentifiedObject.aliasName>
-		<cim:RegulatingControl.discrete>false</cim:RegulatingControl.discrete>
-		<cim:RegulatingControl.mode rdf:resource="http://iec.ch/TC57/2010/CIM-schema-cim15#RegulatingControlModeKind.reactivePower"/>
-		<cim:RegulatingControl.monitoredPhase rdf:resource="http://iec.ch/TC57/2010/CIM-schema-cim15#PhaseCode.ABC"/>
-		<cim:RegulatingControl.targetRange>3.0</cim:RegulatingControl.targetRange>
-		<cim:RegulatingControl.targetValue>220.0</cim:RegulatingControl.targetValue>
-		<cim:RegulatingControl.Terminal rdf:resource="#_T2"/>
-		<cim:TapChangerControl.limitVoltage>230.0</cim:TapChangerControl.limitVoltage>
-		<cim:TapChangerControl.lineDropCompensation>false</cim:TapChangerControl.lineDropCompensation>
-		<cim:TapChangerControl.lineDropR>0.6</cim:TapChangerControl.lineDropR>
-		<cim:TapChangerControl.lineDropX>1.5</cim:TapChangerControl.lineDropX>
-		<cim:TapChangerControl.reverseLineDropR>0.55</cim:TapChangerControl.reverseLineDropR>
-		<cim:TapChangerControl.reverseLineDropX>1.4</cim:TapChangerControl.reverseLineDropX>
-	</cim:TapChangerControl>
-
-	<!-- TapChanger Objects -->
-	<cim:TapChanger rdf:ID="_TC1">
-		<cim:IdentifiedObject.mRID>TC1</cim:IdentifiedObject.mRID>
-		<cim:IdentifiedObject.name>TapChanger_1</cim:IdentifiedObject.name>
-		<cim:IdentifiedObject.aliasName>TC1_Alias</cim:IdentifiedObject.aliasName>
-		<cim:TapChanger.highStep>16</cim:TapChanger.highStep>
-		<cim:TapChanger.initialDelay>5.0</cim:TapChanger.initialDelay>
-		<cim:TapChanger.lowStep>0</cim:TapChanger.lowStep>
-		<cim:TapChanger.ltcFlag>true</cim:TapChanger.ltcFlag>
-		<cim:TapChanger.neutralStep>8</cim:TapChanger.neutralStep>
-		<cim:TapChanger.neutralU>110.0</cim:TapChanger.neutralU>
-		<cim:TapChanger.normalStep>8</cim:TapChanger.normalStep>
-		<cim:TapChanger.regulationStatus>true</cim:TapChanger.regulationStatus>
-		<cim:TapChanger.subsequentDelay>2.5</cim:TapChanger.subsequentDelay>
-		<cim:TapChanger.TapChangerControl rdf:resource="#_TCC1"/>
-	</cim:TapChanger>
-
-	<cim:TapChanger rdf:ID="_TC2">
-		<cim:IdentifiedObject.mRID>TC2</cim:IdentifiedObject.mRID>
-		<cim:IdentifiedObject.name>TapChanger_2</cim:IdentifiedObject.name>
-		<cim:IdentifiedObject.aliasName>TC2_Alias</cim:IdentifiedObject.aliasName>
-		<cim:TapChanger.highStep>20</cim:TapChanger.highStep>
-		<cim:TapChanger.initialDelay>6.0</cim:TapChanger.initialDelay>
-		<cim:TapChanger.lowStep>-4</cim:TapChanger.lowStep>
-		<cim:TapChanger.ltcFlag>true</cim:TapChanger.ltcFlag>
-		<cim:TapChanger.neutralStep>10</cim:TapChanger.neutralStep>
-		<cim:TapChanger.neutralU>220.0</cim:TapChanger.neutralU>
-		<cim:TapChanger.normalStep>10</cim:TapChanger.normalStep>
-		<cim:TapChanger.regulationStatus>true</cim:TapChanger.regulationStatus>
-		<cim:TapChanger.subsequentDelay>3.0</cim:TapChanger.subsequentDelay>
-		<cim:TapChanger.TapChangerControl rdf:resource="#_TCC2"/>
-	</cim:TapChanger>
-
-	<!-- PowerTransformerEnd Objects -->
+	<!-- PowerTransformerEnd Objects (DMSType: POWERTRANSFORMEREND = 0x0002) -->
+	<!-- Inherits: IdentifiedObject, TransformerEnd -->
 	<cim:PowerTransformerEnd rdf:ID="_PTE1">
+		<!-- IdentifiedObject attributes -->
 		<cim:IdentifiedObject.mRID>PTE1</cim:IdentifiedObject.mRID>
 		<cim:IdentifiedObject.name>PowerTransformerEnd_1</cim:IdentifiedObject.name>
 		<cim:IdentifiedObject.aliasName>PTE1_Alias</cim:IdentifiedObject.aliasName>
+		<!-- TransformerEnd attributes -->
 		<cim:TransformerEnd.Terminal rdf:resource="#_T1"/>
+		<!-- PowerTransformerEnd own attributes -->
 		<cim:PowerTransformerEnd.b>0.0001</cim:PowerTransformerEnd.b>
 		<cim:PowerTransformerEnd.b0>0.00015</cim:PowerTransformerEnd.b0>
-		<cim:PowerTransformerEnd.connectionKind rdf:resource="http://iec.ch/TC57/2010/CIM-schema-cim15#WindingConnection.D"/>
+		<cim:PowerTransformerEnd.connectionKind rdf:resource="http://iec.ch/TC57/CIM100#WindingConnection.D"/>
 		<cim:PowerTransformerEnd.g>0.00005</cim:PowerTransformerEnd.g>
 		<cim:PowerTransformerEnd.g0>0.00008</cim:PowerTransformerEnd.g0>
 		<cim:PowerTransformerEnd.phaseAngleClock>11</cim:PowerTransformerEnd.phaseAngleClock>
@@ -140,7 +57,7 @@
 		<cim:TransformerEnd.Terminal rdf:resource="#_T2"/>
 		<cim:PowerTransformerEnd.b>0.00012</cim:PowerTransformerEnd.b>
 		<cim:PowerTransformerEnd.b0>0.00018</cim:PowerTransformerEnd.b0>
-		<cim:PowerTransformerEnd.connectionKind rdf:resource="http://iec.ch/TC57/2010/CIM-schema-cim15#WindingConnection.Yn"/>
+		<cim:PowerTransformerEnd.connectionKind rdf:resource="http://iec.ch/TC57/CIM100#WindingConnection.Yn"/>
 		<cim:PowerTransformerEnd.g>0.00006</cim:PowerTransformerEnd.g>
 		<cim:PowerTransformerEnd.g0>0.00009</cim:PowerTransformerEnd.g0>
 		<cim:PowerTransformerEnd.phaseAngleClock>0</cim:PowerTransformerEnd.phaseAngleClock>
@@ -152,5 +69,126 @@
 		<cim:PowerTransformerEnd.x0>18.0</cim:PowerTransformerEnd.x0>
 		<cim:PowerTransformerEnd.PowerTransformer rdf:resource="#_PT2"/>
 	</cim:PowerTransformerEnd>
+
+	<!-- TapChanger Objects (DMSType: TAPCHANGER = 0x0003) -->
+	<!-- Inherits: IdentifiedObject, PowerSystemResource -->
+	<cim:TapChanger rdf:ID="_TC1">
+		<!-- IdentifiedObject attributes -->
+		<cim:IdentifiedObject.mRID>TC1</cim:IdentifiedObject.mRID>
+		<cim:IdentifiedObject.name>TapChanger_1</cim:IdentifiedObject.name>
+		<cim:IdentifiedObject.aliasName>TC1_Alias</cim:IdentifiedObject.aliasName>
+		<!-- TapChanger own attributes -->
+		<cim:TapChanger.highStep>16</cim:TapChanger.highStep>
+		<cim:TapChanger.initialDelay>5.0</cim:TapChanger.initialDelay>
+		<cim:TapChanger.lowStep>0</cim:TapChanger.lowStep>
+		<cim:TapChanger.ltcFlag>true</cim:TapChanger.ltcFlag>
+		<cim:TapChanger.neutralStep>8</cim:TapChanger.neutralStep>
+		<cim:TapChanger.neutralU>110.0</cim:TapChanger.neutralU>
+		<cim:TapChanger.normalStep>8</cim:TapChanger.normalStep>
+		<cim:TapChanger.regulationStatus>true</cim:TapChanger.regulationStatus>
+		<cim:TapChanger.subsequentDelay>2.5</cim:TapChanger.subsequentDelay>
+		<cim:TapChanger.TapChangerControl rdf:resource="#_TCC1"/>
+	</cim:TapChanger>
+
+	<cim:TapChanger rdf:ID="_TC2">
+		<cim:IdentifiedObject.mRID>TC2</cim:IdentifiedObject.mRID>
+		<cim:IdentifiedObject.name>TapChanger_2</cim:IdentifiedObject.name>
+		<cim:IdentifiedObject.aliasName>TC2_Alias</cim:IdentifiedObject.aliasName>
+		<cim:TapChanger.highStep>20</cim:TapChanger.highStep>
+		<cim:TapChanger.initialDelay>6.0</cim:TapChanger.initialDelay>
+		<cim:TapChanger.lowStep>-4</cim:TapChanger.lowStep>
+		<cim:TapChanger.ltcFlag>false</cim:TapChanger.ltcFlag>
+		<cim:TapChanger.neutralStep>10</cim:TapChanger.neutralStep>
+		<cim:TapChanger.neutralU>220.0</cim:TapChanger.neutralU>
+		<cim:TapChanger.normalStep>10</cim:TapChanger.normalStep>
+		<cim:TapChanger.regulationStatus>false</cim:TapChanger.regulationStatus>
+		<cim:TapChanger.subsequentDelay>3.0</cim:TapChanger.subsequentDelay>
+		<cim:TapChanger.TapChangerControl rdf:resource="#_TCC2"/>
+	</cim:TapChanger>
+
+	<!-- TapChangerControl Objects (DMSType: TAPCHANGERCONTROL = 0x0004) -->
+	<!-- Inherits: IdentifiedObject, PowerSystemResource, RegulatingControl -->
+	<cim:TapChangerControl rdf:ID="_TCC1">
+		<!-- IdentifiedObject attributes -->
+		<cim:IdentifiedObject.mRID>TCC1</cim:IdentifiedObject.mRID>
+		<cim:IdentifiedObject.name>TapChangerControl_1</cim:IdentifiedObject.name>
+		<cim:IdentifiedObject.aliasName>TCC1_Alias</cim:IdentifiedObject.aliasName>
+		<!-- RegulatingControl attributes -->
+		<cim:RegulatingControl.discrete>true</cim:RegulatingControl.discrete>
+		<cim:RegulatingControl.mode rdf:resource="http://iec.ch/TC57/CIM100#RegulatingControlModeKind.voltage"/>
+		<cim:RegulatingControl.monitoredPhase rdf:resource="http://iec.ch/TC57/CIM100#PhaseCode.A"/>
+		<cim:RegulatingControl.targetRange>2.5</cim:RegulatingControl.targetRange>
+		<cim:RegulatingControl.targetValue>110.0</cim:RegulatingControl.targetValue>
+		<cim:RegulatingControl.Terminal rdf:resource="#_T1"/>
+		<!-- TapChangerControl own attributes -->
+		<cim:TapChangerControl.limitVoltage>115.0</cim:TapChangerControl.limitVoltage>
+		<cim:TapChangerControl.lineDropCompensation>true</cim:TapChangerControl.lineDropCompensation>
+		<cim:TapChangerControl.lineDropR>0.5</cim:TapChangerControl.lineDropR>
+		<cim:TapChangerControl.lineDropX>1.2</cim:TapChangerControl.lineDropX>
+		<cim:TapChangerControl.reverseLineDropR>0.45</cim:TapChangerControl.reverseLineDropR>
+		<cim:TapChangerControl.reverseLineDropX>1.1</cim:TapChangerControl.reverseLineDropX>
+	</cim:TapChangerControl>
+
+	<cim:TapChangerControl rdf:ID="_TCC2">
+		<cim:IdentifiedObject.mRID>TCC2</cim:IdentifiedObject.mRID>
+		<cim:IdentifiedObject.name>TapChangerControl_2</cim:IdentifiedObject.name>
+		<cim:IdentifiedObject.aliasName>TCC2_Alias</cim:IdentifiedObject.aliasName>
+		<cim:RegulatingControl.discrete>false</cim:RegulatingControl.discrete>
+		<cim:RegulatingControl.mode rdf:resource="http://iec.ch/TC57/CIM100#RegulatingControlModeKind.reactivePower"/>
+		<cim:RegulatingControl.monitoredPhase rdf:resource="http://iec.ch/TC57/CIM100#PhaseCode.ABC"/>
+		<cim:RegulatingControl.targetRange>3.0</cim:RegulatingControl.targetRange>
+		<cim:RegulatingControl.targetValue>220.0</cim:RegulatingControl.targetValue>
+		<cim:RegulatingControl.Terminal rdf:resource="#_T2"/>
+		<cim:TapChangerControl.limitVoltage>230.0</cim:TapChangerControl.limitVoltage>
+		<cim:TapChangerControl.lineDropCompensation>false</cim:TapChangerControl.lineDropCompensation>
+		<cim:TapChangerControl.lineDropR>0.6</cim:TapChangerControl.lineDropR>
+		<cim:TapChangerControl.lineDropX>1.5</cim:TapChangerControl.lineDropX>
+		<cim:TapChangerControl.reverseLineDropR>0.55</cim:TapChangerControl.reverseLineDropR>
+		<cim:TapChangerControl.reverseLineDropX>1.4</cim:TapChangerControl.reverseLineDropX>
+	</cim:TapChangerControl>
+
+	<!-- Terminal Objects (DMSType: TERMINAL = 0x0005) -->
+	<!-- Inherits: IdentifiedObject -->
+	<cim:Terminal rdf:ID="_T1">
+		<!-- IdentifiedObject attributes -->
+		<cim:IdentifiedObject.mRID>T1</cim:IdentifiedObject.mRID>
+		<cim:IdentifiedObject.name>Terminal_1</cim:IdentifiedObject.name>
+		<cim:IdentifiedObject.aliasName>T1_Alias</cim:IdentifiedObject.aliasName>
+		<!-- Terminal own attributes -->
+		<cim:Terminal.connected>true</cim:Terminal.connected>
+		<cim:Terminal.phases rdf:resource="http://iec.ch/TC57/CIM100#PhaseCode.ABC"/>
+		<cim:Terminal.sequenceNumber>1</cim:Terminal.sequenceNumber>
+		<cim:Terminal.ConductingEquipment rdf:resource="#_PT1"/>
+	</cim:Terminal>
+
+	<cim:Terminal rdf:ID="_T2">
+		<cim:IdentifiedObject.mRID>T2</cim:IdentifiedObject.mRID>
+		<cim:IdentifiedObject.name>Terminal_2</cim:IdentifiedObject.name>
+		<cim:IdentifiedObject.aliasName>T2_Alias</cim:IdentifiedObject.aliasName>
+		<cim:Terminal.connected>true</cim:Terminal.connected>
+		<cim:Terminal.phases rdf:resource="http://iec.ch/TC57/CIM100#PhaseCode.ABCN"/>
+		<cim:Terminal.sequenceNumber>1</cim:Terminal.sequenceNumber>
+		<cim:Terminal.ConductingEquipment rdf:resource="#_PT2"/>
+	</cim:Terminal>
+
+	<cim:Terminal rdf:ID="_T3">
+		<cim:IdentifiedObject.mRID>T3</cim:IdentifiedObject.mRID>
+		<cim:IdentifiedObject.name>Terminal_3</cim:IdentifiedObject.name>
+		<cim:IdentifiedObject.aliasName>T3_Alias</cim:IdentifiedObject.aliasName>
+		<cim:Terminal.connected>false</cim:Terminal.connected>
+		<cim:Terminal.phases rdf:resource="http://iec.ch/TC57/CIM100#PhaseCode.AB"/>
+		<cim:Terminal.sequenceNumber>2</cim:Terminal.sequenceNumber>
+		<cim:Terminal.ConductingEquipment rdf:resource="#_PT1"/>
+	</cim:Terminal>
+
+	<cim:Terminal rdf:ID="_T4">
+		<cim:IdentifiedObject.mRID>T4</cim:IdentifiedObject.mRID>
+		<cim:IdentifiedObject.name>Terminal_4</cim:IdentifiedObject.name>
+		<cim:IdentifiedObject.aliasName>T4_Alias</cim:IdentifiedObject.aliasName>
+		<cim:Terminal.connected>true</cim:Terminal.connected>
+		<cim:Terminal.phases rdf:resource="http://iec.ch/TC57/CIM100#PhaseCode.ABC"/>
+		<cim:Terminal.sequenceNumber>2</cim:Terminal.sequenceNumber>
+		<cim:Terminal.ConductingEquipment rdf:resource="#_PT2"/>
+	</cim:Terminal>
 
 </rdf:RDF>

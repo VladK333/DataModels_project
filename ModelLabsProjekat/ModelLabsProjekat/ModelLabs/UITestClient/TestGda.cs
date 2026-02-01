@@ -207,8 +207,6 @@ namespace UITestClient
                 {
                     if (type != DMSType.MASK_TYPE)
                     {
-
-
                         currType = type;
                         properties = modelResourcesDesc.GetAllPropertyIds(type);
 
@@ -229,18 +227,16 @@ namespace UITestClient
 
                         bool ok = GdaQueryProxy.IteratorClose(iteratorId);
 
-                        message = string.Format("Number of {0} in model {1}.", type, ids.Count);
+                        message = string.Format("Number of {0} in model: {1}.", type, ids.Count);
                         Console.WriteLine(message);
                         CommonTrace.WriteTrace(CommonTrace.TraceInfo, message);
                     }
                 }
 
-
                 message = "Getting extent values for all DMS types successfully ended.";
                 Console.WriteLine(message);
                 CommonTrace.WriteTrace(CommonTrace.TraceInfo, message);
             }
-
             catch (Exception e)
             {
                 message = string.Format("Getting extent values for all DMS types failed for type {0}.\n\t{1}", currType, e.Message);
@@ -261,7 +257,6 @@ namespace UITestClient
             Console.WriteLine(message);
             CommonTrace.WriteTrace(CommonTrace.TraceInfo, message);
 
-
             UpdateResult updateResult = null;
 
             try
@@ -279,7 +274,6 @@ namespace UITestClient
                 message = "Apply update method finished. \n" + updateResult.ToString();
                 Console.WriteLine(message);
                 CommonTrace.WriteTrace(CommonTrace.TraceInfo, message);
-
             }
             catch (Exception ex)
             {
@@ -395,7 +389,6 @@ namespace UITestClient
                     }
 
                     updateResult = TestApplyDeltaUpdate(gids);
-
                     updateResult = TestApplyDeltaDelete(gids);
                 }
             }
@@ -565,9 +558,7 @@ namespace UITestClient
 
             #region Set references
 
-            //SetPowerTransformerReferences(updates);
-            //SetTransformerWindingReferences(updates);
-            //SetWindingTestRefernces(updates);
+            SetPowerTransformerModelReferences(updates);
 
             #endregion Set references
 
@@ -598,7 +589,7 @@ namespace UITestClient
                         switch (Property.GetPropertyType(propertyId))
                         {
                             case PropertyType.Bool:
-                                rd.AddProperty(new Property(propertyId, true));
+                                rd.AddProperty(new Property(propertyId, false));
                                 break;
 
                             case PropertyType.Byte:
@@ -620,7 +611,7 @@ namespace UITestClient
                                 break;
 
                             case PropertyType.Reference:
-                                rd.AddProperty(new Property(propertyId, (long)0));
+                                // Don't update references
                                 break;
 
                             case PropertyType.Float:
@@ -673,61 +664,69 @@ namespace UITestClient
             }
             #endregion Creating resources
 
-            #region Set references
-
-            //SetPowerTransformerReferences(updates);
-            //SetTransformerWindingReferences(updates);
-            //SetWindingTestRefernces(updates);
-
-            #endregion Set references
-
             return updates;
         }
 
         #region set references
 
-        //private void SetPowerTransformerReferences(Dictionary<DMSType, ResourceDescription> updates)
-        //{
-        //    for (int i = 0; i < updates[DMSType.POWERTR].Properties.Count; i++)
-        //    {
-        //        if (updates[DMSType.POWERTR].Properties[i].Id == ModelCode.PSR_LOCATION)
-        //        {
-        //            updates[DMSType.POWERTR].Properties[i].SetValue(updates[DMSType.LOCATION].Id);
-        //        }
-        //    }
-        //}
+        private void SetPowerTransformerModelReferences(Dictionary<DMSType, ResourceDescription> updates)
+        {
+            // Terminal.ConductingEquipment -> PowerTransformer
+            if (updates.ContainsKey(DMSType.TERMINAL) && updates.ContainsKey(DMSType.POWERTRANSFORMER))
+            {
+                for (int i = 0; i < updates[DMSType.TERMINAL].Properties.Count; i++)
+                {
+                    if (updates[DMSType.TERMINAL].Properties[i].Id == ModelCode.TERMINAL_CONEQUIP)
+                    {
+                        updates[DMSType.TERMINAL].Properties[i].SetValue(updates[DMSType.POWERTRANSFORMER].Id);
+                    }
+                }
+            }
 
-        //private void SetTransformerWindingReferences(Dictionary<DMSType, ResourceDescription> updates)
-        //{
-        //    for (int i = 0; i < updates[DMSType.POWERTRWINDING].Properties.Count; i++)
-        //    {
-        //        if (updates[DMSType.POWERTRWINDING].Properties[i].Id == ModelCode.CONDEQ_BASVOLTAGE)
-        //        {
-        //            updates[DMSType.POWERTRWINDING].Properties[i].SetValue(updates[DMSType.BASEVOLTAGE].Id);
-        //        }
+            // TapChangerControl.Terminal -> Terminal
+            if (updates.ContainsKey(DMSType.TAPCHANGERCONTROL) && updates.ContainsKey(DMSType.TERMINAL))
+            {
+                for (int i = 0; i < updates[DMSType.TAPCHANGERCONTROL].Properties.Count; i++)
+                {
+                    if (updates[DMSType.TAPCHANGERCONTROL].Properties[i].Id == ModelCode.REGULATIONGCONTROL_TERMINAL)
+                    {
+                        updates[DMSType.TAPCHANGERCONTROL].Properties[i].SetValue(updates[DMSType.TERMINAL].Id);
+                    }
+                }
+            }
 
-        //        if (updates[DMSType.POWERTRWINDING].Properties[i].Id == ModelCode.PSR_LOCATION)
-        //        {
-        //            updates[DMSType.POWERTRWINDING].Properties[i].SetValue(updates[DMSType.LOCATION].Id);
-        //        }
+            // TapChanger.TapChangerControl -> TapChangerControl
+            if (updates.ContainsKey(DMSType.TAPCHANGER) && updates.ContainsKey(DMSType.TAPCHANGERCONTROL))
+            {
+                for (int i = 0; i < updates[DMSType.TAPCHANGER].Properties.Count; i++)
+                {
+                    if (updates[DMSType.TAPCHANGER].Properties[i].Id == ModelCode.TAPCHANGER_TAPCHANGERCONTROL)
+                    {
+                        updates[DMSType.TAPCHANGER].Properties[i].SetValue(updates[DMSType.TAPCHANGERCONTROL].Id);
+                    }
+                }
+            }
 
-        //        if (updates[DMSType.POWERTRWINDING].Properties[i].Id == ModelCode.POWERTRWINDING_POWERTRW)
-        //        {
-        //            updates[DMSType.POWERTRWINDING].Properties[i].SetValue(updates[DMSType.POWERTR].Id);
-        //        }
-        //    }
-        //}
+            // PowerTransformerEnd.Terminal -> Terminal
+            // PowerTransformerEnd.PowerTransformer -> PowerTransformer
+            if (updates.ContainsKey(DMSType.POWERTRANSFORMEREND))
+            {
+                for (int i = 0; i < updates[DMSType.POWERTRANSFORMEREND].Properties.Count; i++)
+                {
+                    if (updates[DMSType.POWERTRANSFORMEREND].Properties[i].Id == ModelCode.TRANSFORMEREND_TERMINAL
+                        && updates.ContainsKey(DMSType.TERMINAL))
+                    {
+                        updates[DMSType.POWERTRANSFORMEREND].Properties[i].SetValue(updates[DMSType.TERMINAL].Id);
+                    }
 
-        //private void SetWindingTestRefernces(Dictionary<DMSType, ResourceDescription> updates)
-        //{
-        //    for (int i = 0; i < updates[DMSType.WINDINGTEST].Properties.Count; i++)
-        //    {
-        //        if (updates[DMSType.WINDINGTEST].Properties[i].Id == ModelCode.WINDINGTEST_POWERTRWINDING)
-        //        {
-        //            updates[DMSType.WINDINGTEST].Properties[i].SetValue(updates[DMSType.POWERTRWINDING].Id);
-        //        }
-        //    }
-        //}
+                    if (updates[DMSType.POWERTRANSFORMEREND].Properties[i].Id == ModelCode.POWERTRANSEND_PTRANS
+                        && updates.ContainsKey(DMSType.POWERTRANSFORMER))
+                    {
+                        updates[DMSType.POWERTRANSFORMEREND].Properties[i].SetValue(updates[DMSType.POWERTRANSFORMER].Id);
+                    }
+                }
+            }
+        }
 
         #endregion set references
 

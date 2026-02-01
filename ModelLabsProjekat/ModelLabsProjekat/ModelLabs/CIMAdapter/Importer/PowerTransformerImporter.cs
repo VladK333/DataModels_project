@@ -93,11 +93,18 @@ namespace FTN.ESI.SIMES.CIM.CIMAdapter.Importer
             LogManager.Log("Loading elements and creating delta...", LogLevel.Info);
 
             //// import all concrete model types (DMSType enum)
+            //// Follow the correct order based on UML diagram and dependencies:
+            //// 1. PowerTransformer - base equipment
+            //// 2. Terminal - references ConductingEquipment
+            //// 3. TapChangerControl - references Terminal
+            //// 4. TapChanger - references TapChangerControl
+            //// 5. PowerTransformerEnd - references PowerTransformer and Terminal
+
             ImportPowerTransformer();
+            ImportTerminal();
             ImportTapChangerControl();
             ImportTapChanger();
             ImportPowerTransformerEnd();
-            ImportTerminal();
 
             LogManager.Log("Loading elements and creating delta completed.", LogLevel.Info);
         }
@@ -139,6 +146,45 @@ namespace FTN.ESI.SIMES.CIM.CIMAdapter.Importer
 
                 ////populate ResourceDescription
                 PowerTransformerConverter.PopulatePowerTransformerProperties(cimPowerTransformer, rd);
+            }
+            return rd;
+        }
+
+        private void ImportTerminal()
+        {
+            SortedDictionary<string, object> cimTerminals = concreteModel.GetAllObjectsOfType("FTN.Terminal");
+            if (cimTerminals != null)
+            {
+                foreach (KeyValuePair<string, object> cimTerminalPair in cimTerminals)
+                {
+                    FTN.Terminal cimTerminal = cimTerminalPair.Value as FTN.Terminal;
+
+                    ResourceDescription rd = CreateTerminalResourceDescription(cimTerminal);
+                    if (rd != null)
+                    {
+                        delta.AddDeltaOperation(DeltaOpType.Insert, rd, true);
+                        report.Report.Append("Terminal ID = ").Append(cimTerminal.ID).Append(" SUCCESSFULLY converted to GID = ").AppendLine(rd.Id.ToString());
+                    }
+                    else
+                    {
+                        report.Report.Append("Terminal ID = ").Append(cimTerminal.ID).AppendLine(" FAILED to be converted");
+                    }
+                }
+                report.Report.AppendLine();
+            }
+        }
+
+        private ResourceDescription CreateTerminalResourceDescription(FTN.Terminal cimTerminal)
+        {
+            ResourceDescription rd = null;
+            if (cimTerminal != null)
+            {
+                long gid = ModelCodeHelper.CreateGlobalId(0, (short)DMSType.TERMINAL, importHelper.CheckOutIndexForDMSType(DMSType.TERMINAL));
+                rd = new ResourceDescription(gid);
+                importHelper.DefineIDMapping(cimTerminal.ID, gid);
+
+                ////populate ResourceDescription
+                PowerTransformerConverter.PopulateTerminalProperties(cimTerminal, rd, importHelper, report);
             }
             return rd;
         }
@@ -256,45 +302,6 @@ namespace FTN.ESI.SIMES.CIM.CIMAdapter.Importer
 
                 ////populate ResourceDescription
                 PowerTransformerConverter.PopulatePowerTransformerEndProperties(cimPowerTransformerEnd, rd, importHelper, report);
-            }
-            return rd;
-        }
-
-        private void ImportTerminal()
-        {
-            SortedDictionary<string, object> cimTerminals = concreteModel.GetAllObjectsOfType("FTN.Terminal");
-            if (cimTerminals != null)
-            {
-                foreach (KeyValuePair<string, object> cimTerminalPair in cimTerminals)
-                {
-                    FTN.Terminal cimTerminal = cimTerminalPair.Value as FTN.Terminal;
-
-                    ResourceDescription rd = CreateTerminalResourceDescription(cimTerminal);
-                    if (rd != null)
-                    {
-                        delta.AddDeltaOperation(DeltaOpType.Insert, rd, true);
-                        report.Report.Append("Terminal ID = ").Append(cimTerminal.ID).Append(" SUCCESSFULLY converted to GID = ").AppendLine(rd.Id.ToString());
-                    }
-                    else
-                    {
-                        report.Report.Append("Terminal ID = ").Append(cimTerminal.ID).AppendLine(" FAILED to be converted");
-                    }
-                }
-                report.Report.AppendLine();
-            }
-        }
-
-        private ResourceDescription CreateTerminalResourceDescription(FTN.Terminal cimTerminal)
-        {
-            ResourceDescription rd = null;
-            if (cimTerminal != null)
-            {
-                long gid = ModelCodeHelper.CreateGlobalId(0, (short)DMSType.TERMINAL, importHelper.CheckOutIndexForDMSType(DMSType.TERMINAL));
-                rd = new ResourceDescription(gid);
-                importHelper.DefineIDMapping(cimTerminal.ID, gid);
-
-                ////populate ResourceDescription
-                PowerTransformerConverter.PopulateTerminalProperties(cimTerminal, rd, importHelper, report);
             }
             return rd;
         }
