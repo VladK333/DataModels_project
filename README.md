@@ -40,7 +40,7 @@ EA diagram → CIM Profile → RDFS → Generated DLL → Adapter → Delta → 
 - Reading all TransformerWinding objects related to the transformer with the highest GID.
 - Reading an object with the minimum value of a specific property.
 
-For a higher grade, a WPF GUI is implemented for data visualization.
+WPF GUI is implemented for data visualization.
 
 ---
 
